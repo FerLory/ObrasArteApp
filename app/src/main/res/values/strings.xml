@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">ObrasArteApp</string>
+    <string name="imagen_de_obra">Imagen de la obra</string>
+    <string name="label_autor">Autor: %s</string>
+    <string name="label_anio">Año: %s</string>
+    <string name="label_estilo">Estilo: %s</string>
+    <string name="label_ubicacion">Ubicación: %s</string>
+    <string name="error_carga_obras">Error al cargar obras</string>
+</resources>

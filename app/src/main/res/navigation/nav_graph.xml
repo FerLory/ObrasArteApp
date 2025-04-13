@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/obrasListFragment">
+
+    <fragment
+        android:id="@+id/obrasListFragment"
+        android:name="com.example.obrasarteapp.ui.fragments.ObrasListFragment"
+        android:label="Lista de Obras">
+        <action
+            android:id="@+id/action_obrasListFragment_to_detalleObraFragment"
+            app:destination="@id/detalleObraFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/detalleObraFragment"
+        android:name="com.example.obrasarteapp.ui.fragments.DetalleObraFragment"
+        android:label="Detalle de Obra">
+        <argument
+            android:name="obra"
+            app:argType="com.example.obrasarteapp.data.remote.model.ObraDto" />
+    </fragment>
+</navigation>
