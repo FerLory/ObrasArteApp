@@ -14,53 +14,75 @@
         android:padding="16dp"
         android:elevation="6dp">
 
+
         <ImageView
             android:id="@+id/ivObraDetalle"
             android:layout_width="match_parent"
             android:layout_height="250dp"
             android:scaleType="centerCrop"
-            android:contentDescription="@string/imagen_de_obra"
+            android:contentDescription="@string/image_art"
             android:layout_marginBottom="12dp"/>
+
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp">
+
+            <WebView
+                android:id="@+id/webView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"/>
+        </FrameLayout>
+
 
         <TextView
             android:id="@+id/tvTituloDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Nombre de la Obra"
+            android:text="@string/workart_name"
             android:textSize="22sp"
             android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
+            android:layout_marginBottom="8dp"/>
 
         <TextView
             android:id="@+id/tvAutorDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Autor:"
+            android:text="@string/Author"
             android:textSize="18sp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"/>
 
         <TextView
             android:id="@+id/tvAnioDetalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Año:"
+            android:text="@string/year"
             android:textSize="18sp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"/>
 
         <TextView
             android:id="@+id/tvEstilo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Estilo:"
+            android:text="@string/name_style"
             android:textSize="18sp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"/>
 
         <TextView
             android:id="@+id/tvUbicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Ubicación:"
+            android:text="@string/location"
             android:textSize="18sp"
-            android:layout_marginBottom="4dp" />
+            android:layout_marginBottom="4dp"/>
     </LinearLayout>
 </ScrollView>

@@ -1,6 +1,7 @@
 package com.example.obrasarteapp.ui.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,14 @@ class ObrasListFragment : Fragment() {
             try {
                 val obras = repository.getObras()
 
+                // Verificar si hay obras y si el videoUrl existe
+                if (obras.isNotEmpty()) {
+                    Log.d("TEST_VIDEO", "URL del video: ${obras[0].videoUrl}") // ¡Aquí va!
+                } else {
+                    Log.e("TEST_VIDEO", "La lista de obras está vacía")
+                }
+
+
                 binding.rvObras.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvObras.adapter = ObrasAdapter(obras) { obraSeleccionada ->
                     val action = ObrasListFragmentDirections
@@ -52,6 +61,7 @@ class ObrasListFragment : Fragment() {
                 binding.progressBar.visibility = View.GONE
             }
         }
+
     }
 
     override fun onDestroyView() {

@@ -2,8 +2,21 @@
     <string name="app_name">ObrasArteApp</string>
     <string name="imagen_de_obra">Imagen de la obra</string>
     <string name="label_autor">Autor: %s</string>
-    <string name="label_anio">Año: %s</string>
+    <string name="label_anio">Año: %d</string>
     <string name="label_estilo">Estilo: %s</string>
     <string name="label_ubicacion">Ubicación: %s</string>
     <string name="error_carga_obras">Error al cargar obras</string>
+    <string name="title_artworks">Obras de Arte</string>
+    <string name="image_art">Imagen de la obra</string>
+    <string name="workart_name">Nombre de la Obra</string>
+    <string name="Author">Autor:</string>
+    <string name="year">Año:</string>
+    <string name="name_style">Estilo:</string>
+    <string name="location">Ubicación:</string>
+    <string name="workartname">Nombre de la obra</string>
+    <string name="autor">Autor</string>
+    <string name="a_o">Año</string>
+    <string name="error_al_cargar_el_video">Error al cargar el video</string>
+    <string name="url_de_video_inv_lida">URL de video inválida</string>
+
 </resources>

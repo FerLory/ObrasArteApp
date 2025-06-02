@@ -14,5 +14,7 @@ data class ObraDto(
     val estilo: String,
     @SerializedName("ubicación")
     val ubicacion: String,
-    val imagen: String
+    val imagen: String,
+    @SerializedName("video_url")
+    val videoUrl: String
 ) : Parcelable

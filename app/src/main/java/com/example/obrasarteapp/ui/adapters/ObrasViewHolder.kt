@@ -1,5 +1,6 @@
 package com.example.obrasarteapp.ui.adapters
 
+import android.media.MediaPlayer
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.obrasarteapp.R
@@ -23,6 +24,13 @@ class ObrasViewHolder(
             .into(binding.ivObra)
 
         binding.root.setOnClickListener {
+            // Reproducir sonido al hacer clic
+            val mediaPlayer = MediaPlayer.create(binding.root.context, R.raw.ding)
+            mediaPlayer.start()
+
+            mediaPlayer.setOnCompletionListener {
+                mediaPlayer.release()
+            }
             onItemClick(obra)
         }
     }
