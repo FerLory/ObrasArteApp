@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/obrasListFragment"
         android:name="com.example.obrasarteapp.ui.fragments.ObrasListFragment"
-        android:label="Lista de Obras">
+        android:label="@string/lista_de_obras">
         <action
             android:id="@+id/action_obrasListFragment_to_detalleObraFragment"
             app:destination="@id/detalleObraFragment"
@@ -18,9 +18,9 @@
     <fragment
         android:id="@+id/detalleObraFragment"
         android:name="com.example.obrasarteapp.ui.fragments.DetalleObraFragment"
-        android:label="Detalle de Obra">
+        android:label="@string/detalle_de_obra">
         <argument
-            android:name="obra"
-            app:argType="com.example.obrasarteapp.data.remote.model.ObraDto" />
+            android:name="obraId"
+            app:argType="integer" />
     </fragment>
 </navigation>

@@ -24,7 +24,19 @@
         </activity>
 
         <activity android:name="com.example.obrasarteapp.MainActivity" />
+
+
+        <activity android:name="com.example.obrasarteapp.LoginActivity" />
+        <activity android:name="com.example.obrasarteapp.RegistroActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyCPGsMpUOUgblm3JC9Nx9g9Cp7ZJpAFRic" />
+
+        <activity android:name=".MapsActivity"/>
+
     </application>
+
     <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>

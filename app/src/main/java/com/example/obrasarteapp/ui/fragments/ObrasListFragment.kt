@@ -15,11 +15,17 @@ import com.example.obrasarteapp.databinding.FragmentObrasListBinding
 import com.example.obrasarteapp.ui.adapters.ObrasAdapter
 import kotlinx.coroutines.launch
 import com.example.obrasarteapp.R
+import com.example.obrasarteapp.data.remote.model.ObraDto
 
 class ObrasListFragment : Fragment() {
 
     private var _binding: FragmentObrasListBinding? = null
     private val binding get() = _binding!!
+
+
+    companion object {
+        var listaObrasGlobal: List<ObraDto> = emptyList()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,24 +45,38 @@ class ObrasListFragment : Fragment() {
             try {
                 val obras = repository.getObras()
 
-                // Verificar si hay obras y si el videoUrl existe
-                if (obras.isNotEmpty()) {
-                    Log.d("TEST_VIDEO", "URL del video: ${obras[0].videoUrl}") // ¡Aquí va!
-                } else {
-                    Log.e("TEST_VIDEO", "La lista de obras está vacía")
+
+                listaObrasGlobal = obras
+
+
+                obras.forEach { obra ->
+                    Log.d(
+                        getString(R.string.test_coords),
+                        "Obra: ${obra.nombre}, lat=${obra.latitud}, lon=${obra.longitud}, ubicacion='${obra.ubicacion}'"
+                    )
                 }
 
 
+
+                if (obras.isNotEmpty()) {
+                    Log.d(getString(R.string.test_video), "URL del video: ${obras[0].videoUrl}")
+                } else {
+                    Log.e(getString(R.string.test_videos),
+                        getString(R.string.la_lista_de_obras_est_vac_a))
+                }
+
                 binding.rvObras.layoutManager = LinearLayoutManager(requireContext())
                 binding.rvObras.adapter = ObrasAdapter(obras) { obraSeleccionada ->
+
                     val action = ObrasListFragmentDirections
-                        .actionObrasListFragmentToDetalleObraFragment(obraSeleccionada)
+                        .actionObrasListFragmentToDetalleObraFragment(obraSeleccionada.id)
                     findNavController().navigate(action)
                 }
 
                 binding.rvObras.visibility = View.VISIBLE
             } catch (e: Exception) {
                 Toast.makeText(requireContext(), getString(R.string.error_carga_obras), Toast.LENGTH_SHORT).show()
+                Log.e(getString(R.string.error_obras), getString(R.string.error_al_obtener_obras), e)
             } finally {
                 binding.progressBar.visibility = View.GONE
             }

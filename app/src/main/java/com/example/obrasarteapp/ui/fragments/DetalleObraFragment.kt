@@ -1,5 +1,6 @@
 package com.example.obrasarteapp.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.webkit.WebView
@@ -7,12 +8,16 @@ import android.webkit.WebViewClient
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.example.obrasarteapp.MapsActivity
 import com.example.obrasarteapp.R
+import com.example.obrasarteapp.application.ObrasArteApp
 import com.example.obrasarteapp.data.remote.model.ObraDto
 import com.example.obrasarteapp.databinding.FragmentDetalleObraBinding
+import kotlinx.coroutines.launch
 
 class DetalleObraFragment : Fragment() {
 
@@ -31,12 +36,41 @@ class DetalleObraFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val obra = args.obra
 
-        setupActionBar()
-        cargarImagen(obra)
-        mostrarDatos(obra)
-        configurarWebView(obra.videoUrl)
+        val obraId = args.obraId
+        val repository = (requireActivity().application as ObrasArteApp).repository
+
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                val obras = repository.getObras()
+                val obra = obras.find { it.id == obraId }
+
+                if (obra == null) {
+                    Toast.makeText(requireContext(),
+                        getString(R.string.obra_no_encontrada), Toast.LENGTH_SHORT).show()
+                    findNavController().navigateUp()
+                    return@launch
+                }
+
+                setupActionBar()
+                cargarImagen(obra)
+                mostrarDatos(obra)
+                configurarWebView(obra.videoUrl)
+
+                binding.btnVerMapa.setOnClickListener {
+                    val intent = Intent(requireContext(), MapsActivity::class.java)
+                    intent.putExtra(getString(R.string.latitud), obra.latitud)
+                    intent.putExtra(getString(R.string.longitud), obra.longitud)
+                    intent.putExtra(getString(R.string.ubicacion), obra.ubicacion)
+                    startActivity(intent)
+                }
+
+            } catch (e: Exception) {
+                Toast.makeText(requireContext(),
+                    getString(R.string.error_al_cargar_la_obra), Toast.LENGTH_SHORT).show()
+                findNavController().navigateUp()
+            }
+        }
     }
 
     private fun setupActionBar() {
@@ -60,7 +94,6 @@ class DetalleObraFragment : Fragment() {
         binding.tvAnioDetalle.text = getString(R.string.label_anio, obra.anio)
         binding.tvEstilo.text = getString(R.string.label_estilo, obra.estilo)
         binding.tvUbicacion.text = getString(R.string.label_ubicacion, obra.ubicacion)
-
     }
 
     private fun configurarWebView(videoUrl: String) {
@@ -80,8 +113,7 @@ class DetalleObraFragment : Fragment() {
                     failingUrl: String?
                 ) {
                     binding.progressBar.visibility = View.GONE
-                    Toast.makeText(context,
-                        context.getString(R.string.error_al_cargar_el_video), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, context.getString(R.string.error_al_cargar_el_video), Toast.LENGTH_SHORT).show()
                 }
             }
 
@@ -90,8 +122,7 @@ class DetalleObraFragment : Fragment() {
                 loadUrl("https://www.youtube.com/embed/$videoId")
             } catch (e: Exception) {
                 binding.progressBar.visibility = View.GONE
-                Toast.makeText(context,
-                    context.getString(R.string.url_de_video_inv_lida), Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, context.getString(R.string.url_de_video_inv_lida), Toast.LENGTH_SHORT).show()
             }
         }
     }
