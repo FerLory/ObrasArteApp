@@ -84,5 +84,12 @@
             android:text="@string/location"
             android:textSize="18sp"
             android:layout_marginBottom="4dp"/>
+
+        <Button
+            android:id="@+id/btnVerMapa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ver en mapa"
+            android:layout_marginTop="16dp"/>
     </LinearLayout>
 </ScrollView>
